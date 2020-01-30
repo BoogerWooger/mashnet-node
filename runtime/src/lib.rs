@@ -60,6 +60,7 @@ mod ctype;
 mod attestation;
 mod delegation;
 mod did;
+mod portablegabi;
 
 /// The type that is used for identifying authorities.
 pub type AuthorityId = <AuthoritySignature as Verify>::Signer;
@@ -124,7 +125,7 @@ pub const VERSION: RuntimeVersion = RuntimeVersion {
 	apis: RUNTIME_API_VERSIONS,
 };
 
-/// The version infromation used to identify this runtime when compiled natively.
+/// The version information used to identify this runtime when compiled natively.
 #[cfg(feature = "std")]
 pub fn native_version() -> NativeVersion {
 	NativeVersion {
@@ -180,7 +181,7 @@ impl indices::Trait for Runtime {
 	type ResolveHint = indices::SimpleResolveHint<Self::AccountId, Self::AccountIndex>;
 	/// Determine whether an account is dead.
 	type IsDeadAccount = Balances;
-	/// The uniquitous event type.
+	/// The ubiquitous event type.
 	type Event = Event;
 }
 
@@ -197,7 +198,7 @@ impl balances::Trait for Runtime {
 	type OnFreeBalanceZero = ();
 	/// What to do if a new account is created.
 	type OnNewAccount = Indices;
-	/// The uniquitous event type.
+	/// The ubiquitous event type.
 	type Event = Event;
 
 	type TransactionPayment = ();
@@ -206,23 +207,23 @@ impl balances::Trait for Runtime {
 }
 
 impl sudo::Trait for Runtime {
-	/// The uniquitous event type.
+	/// The ubiquitous event type.
 	type Event = Event;
 	type Proposal = Call;
 }
 
 impl attestation::Trait for Runtime {
-	/// The uniquitous event type.
+	/// The ubiquitous event type.
 	type Event = Event;
 }
 
 impl ctype::Trait for Runtime {
-	/// The uniquitous event type.
+	/// The ubiquitous event type.
 	type Event = Event;
 }
 
 impl delegation::Trait for Runtime {
-	/// The uniquitous event type.
+	/// The ubiquitous event type.
 	type Event = Event;
 	type Signer = AccountId;
 	type Signature = AccountSignature;
@@ -230,7 +231,7 @@ impl delegation::Trait for Runtime {
 }
 
 impl did::Trait for Runtime {
-	/// The uniquitous event type.
+	/// The ubiquitous event type.
 	type Event = Event;
 	/// Type for the public signing key in DIDs
 	type PublicSigningKey = Hash;
@@ -238,10 +239,14 @@ impl did::Trait for Runtime {
 	type PublicBoxKey = Hash;
 }
 
+impl portablegabi::Trait for Runtime {
+	type Event = Event;
+}
+
 impl error::Trait for Runtime {
 	/// Error code type
 	type ErrorCode = u16;
-	/// The uniquitous event type.
+	/// The ubiquitous event type.
 	type Event = Event;
 }
 
@@ -264,6 +269,7 @@ construct_runtime!(
 		Delegation: delegation::{Module, Call, Storage, Event<T>},
 		Did: did::{Module, Call, Storage, Event<T>},
 		Error: error::{ Module, Call, Event<T>},
+		Portablegabi: portablegabi::{Module, Call, Storage, Event<T>},
 	}
 );
 
