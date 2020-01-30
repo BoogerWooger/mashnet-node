@@ -169,23 +169,23 @@ decl_module! {
 impl<T: Trait> Module<T> {
 
 	/// Error types for errors in attestation module
-    const ERROR_BASE: u16 = 2000;
-    const ERROR_ALREADY_ATTESTED : error::ErrorType = (Self::ERROR_BASE + 1, "already attested");
-    const ERROR_ALREADY_REVOKED : error::ErrorType = (Self::ERROR_BASE + 2, "already revoked");
-    const ERROR_ATTESTATION_NOT_FOUND : error::ErrorType = (Self::ERROR_BASE + 3, "attestation not found");
-    const ERROR_DELEGATION_REVOKED : error::ErrorType = (Self::ERROR_BASE + 4, "delegation revoked");
-    const ERROR_NOT_DELEGATED_TO_ATTESTER : error::ErrorType = (Self::ERROR_BASE + 5, "not delegated to attester");
-    const ERROR_DELEGATION_NOT_AUTHORIZED_TO_ATTEST : error::ErrorType = (Self::ERROR_BASE + 6, "delegation not authorized to attest");
-    const ERROR_CTYPE_OF_DELEGATION_NOT_MATCHING : error::ErrorType = (Self::ERROR_BASE + 7, "CTYPE of delegation does not match");
-    const ERROR_NOT_PERMITTED_TO_REVOKE_ATTESTATION : error::ErrorType = (Self::ERROR_BASE + 8, "not permitted to revoke attestation");
+	const ERROR_BASE: u16 = 2000;
+	const ERROR_ALREADY_ATTESTED : error::ErrorType = (Self::ERROR_BASE + 1, "already attested");
+	const ERROR_ALREADY_REVOKED : error::ErrorType = (Self::ERROR_BASE + 2, "already revoked");
+	const ERROR_ATTESTATION_NOT_FOUND : error::ErrorType = (Self::ERROR_BASE + 3, "attestation not found");
+	const ERROR_DELEGATION_REVOKED : error::ErrorType = (Self::ERROR_BASE + 4, "delegation revoked");
+	const ERROR_NOT_DELEGATED_TO_ATTESTER : error::ErrorType = (Self::ERROR_BASE + 5, "not delegated to attester");
+	const ERROR_DELEGATION_NOT_AUTHORIZED_TO_ATTEST : error::ErrorType = (Self::ERROR_BASE + 6, "delegation not authorized to attest");
+	const ERROR_CTYPE_OF_DELEGATION_NOT_MATCHING : error::ErrorType = (Self::ERROR_BASE + 7, "CTYPE of delegation does not match");
+	const ERROR_NOT_PERMITTED_TO_REVOKE_ATTESTATION : error::ErrorType = (Self::ERROR_BASE + 8, "not permitted to revoke attestation");
 	
 	/// Create an error using the error module
-    pub fn error(error_type: error::ErrorType) -> Result {
-        return <error::Module<T>>::error(error_type);
-    }
+	pub fn error(error_type: error::ErrorType) -> Result {
+		return <error::Module<T>>::error(error_type);
+	}
 	
 	/// Check delegation hierarchy using the delegation module
-    fn is_delegating(account: &T::AccountId, delegation: &T::DelegationNodeId) -> result::Result<bool, &'static str> {
+	fn is_delegating(account: &T::AccountId, delegation: &T::DelegationNodeId) -> result::Result<bool, &'static str> {
 		<delegation::Module<T>>::is_delegating(account, delegation)
 	}
 }

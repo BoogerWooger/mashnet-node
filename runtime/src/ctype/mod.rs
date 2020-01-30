@@ -80,14 +80,14 @@ decl_storage! {
 
 /// Implementation of further module constants and functions for CTYPEs
 impl<T: Trait> Module<T> {
-    
+	
 	/// Error types for errors in CTYPE module
-    pub const ERROR_BASE: u16 = 1000;
-    pub const ERROR_CTYPE_NOT_FOUND : error::ErrorType = (Self::ERROR_BASE + 1, "CTYPE not found");
-    pub const ERROR_CTYPE_ALREADY_EXISTS : error::ErrorType = (Self::ERROR_BASE + 2, "CTYPE already exists");
+	pub const ERROR_BASE: u16 = 1000;
+	pub const ERROR_CTYPE_NOT_FOUND : error::ErrorType = (Self::ERROR_BASE + 1, "CTYPE not found");
+	pub const ERROR_CTYPE_ALREADY_EXISTS : error::ErrorType = (Self::ERROR_BASE + 2, "CTYPE already exists");
 
 	/// Create an error using the error module
-    pub fn error(error_type: error::ErrorType) -> Result {
-        return <error::Module<T>>::error(error_type);
-    }
+	pub fn error(error_type: error::ErrorType) -> Result {
+		return <error::Module<T>>::error(error_type);
+	}
 }

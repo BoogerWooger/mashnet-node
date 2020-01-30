@@ -35,9 +35,9 @@ pub trait Trait: system::Trait {
 	/// DID specific event type
 	type Event: From<Event<Self>> + Into<<Self as system::Trait>::Event>;
 	/// Public signing key type for DIDs
-    type PublicSigningKey : Parameter + Member + Codec + Default;
+	type PublicSigningKey : Parameter + Member + Codec + Default;
 	/// Public boxing key type for DIDs
-    type PublicBoxKey : Parameter + Member + Codec + Default;
+	type PublicBoxKey : Parameter + Member + Codec + Default;
 }
 
 decl_event!(
@@ -69,19 +69,19 @@ decl_module! {
 			<DIDs<T>>::insert(sender.clone(), (sign_key, box_key, doc_ref));
 			// deposit an event that the DID has been created
 			Self::deposit_event(RawEvent::DidCreated(sender.clone()));
-            Ok(())
+			Ok(())
 		}
 		
 		/// Removes a DID from chain storage, where
 		/// origin - the origin of the transaction
-        pub fn remove(origin) -> Result {
+		pub fn remove(origin) -> Result {
 			// origin of the transaction needs to be a signed sender account
 			let sender = ensure_signed(origin)?;
 			// remove DID from storage
 			<DIDs<T>>::remove(sender.clone());
 			// deposit an event that the DID has been removed
 			Self::deposit_event(RawEvent::DidRemoved(sender.clone()));
-            Ok(())
+			Ok(())
 		}
 	}
 }
